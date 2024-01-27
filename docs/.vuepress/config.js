@@ -5,8 +5,8 @@ export default defineUserConfig({
     base: '/webbook/',
     bundler: viteBundler(),
     theme: defaultTheme({
-        repoLabel: 'GitLab',
-        repo: 'https://gitlab.ccyonyou.com/zhenyou/vuepress',
+        repoLabel: 'GitHub',
+        repo: 'https://github.com/yuzhenyou/webbook',
         lastUpdated: true,
         navbar: [
             {
