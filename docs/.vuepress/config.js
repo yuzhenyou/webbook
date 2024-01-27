@@ -2,6 +2,7 @@ import { defineUserConfig } from 'vuepress'
 import { viteBundler } from '@vuepress/bundler-vite'
 import { defaultTheme } from '@vuepress/theme-default'
 export default defineUserConfig({
+    base: '/webbook/',
     bundler: viteBundler(),
     theme: defaultTheme({
         repoLabel: 'GitLab',
