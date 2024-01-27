@@ -1,4 +1,4 @@
-# TypeScript基础
+## 
 ## 1.基本数据类型和any类型
 > [https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Grammar_and_types#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%B1%BB%E5%9E%8B](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Grammar_and_types#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%B1%BB%E5%9E%8B)
 
@@ -86,7 +86,7 @@ users.push(30)
 users.push(true) //类型“boolean”的参数不能赋给类型“string | number”的参数
 ```
 
-<!-- ![image.png](https://cdn.nlark.com/yuque/0/2024/png/22383356/1706342117104-4ca21143-b5eb-4403-8fc1-e3e47d90a3b1.png#averageHue=%23668643&clientId=u66c66441-197e-4&from=paste&height=346&id=u62c46cec&originHeight=346&originWidth=746&originalType=binary&ratio=1&rotation=0&showTitle=false&size=29837&status=done&style=none&taskId=ub3807f24-011a-468f-a0cf-c7bd81a098e&title=&width=746) -->
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/22383356/1706342117104-4ca21143-b5eb-4403-8fc1-e3e47d90a3b1.png#averageHue=%23668643&clientId=u66c66441-197e-4&from=paste&height=346&id=u62c46cec&originHeight=346&originWidth=746&originalType=binary&ratio=1&rotation=0&showTitle=false&size=29837&status=done&style=none&taskId=ub3807f24-011a-468f-a0cf-c7bd81a098e&title=&width=746)
 ## 3.Interface（接口）
 ```typescript
 //一个对象特征的描述
@@ -320,4 +320,90 @@ function getValue<T, U>(arr: [T, U]): [U, T] {
 let result = getValue(['hello', 123]) //let result: [number, string]
 result[0].length  //报错 类型“number”上不存在属性“length”
 console.log(result[1].length)  //5  string类型
+```
+### 7.1泛型约束
+```typescript
+//泛型约束
+function getLength3<T>(arr: T): T {
+    console.log(arr.length)   //类型“T”上不存在属性“length”
+    return arr
+}
+
+//约束为具有length属性的类型，数组
+function getLength3<T>(arr: T[]): T[] {
+    console.log(arr.length)   
+    return arr
+}
+
+//不够灵活，可能时object或者string等其他类型
+//可以用interface定义,泛型extends，interface所具有的特性约束
+interface IWithLength {
+    length: number
+}
+
+function getLength3<T extends IWithLength>(arr: T): T {
+    console.log(arr.length)
+    return arr
+}
+
+let str3 = getLength3('zhangsan')   //let str3: string
+let str3 = getLength3([1, 2, 3])    //let str3: number[]
+let str3 = getLength3({ length: 1, name: 'zhangsan' }) 
+// let str3: {
+//     length: number;
+//     name: string;
+// }
+```
+### 7.2泛型在类和接口中的使用
+```typescript
+class Queue {
+    private data: any[] = []
+    push(item) {
+        return this.data.push(item)
+    }
+    pop() {
+        return this.data.pop()
+    }
+}
+
+const queue = new Queue()
+queue.push('123')
+const pops = queue.pop()
+if (pops) {
+    pops.toFixed()		// pops.toFixed is not a function
+}
+
+//用泛型约束
+class Queue<T> {
+    private data: T[] = []
+    push(item: T) {
+        return this.data.push(item)
+    }
+    pop() {
+        return this.data.pop()
+    }
+}
+
+const queue = new Queue<number>()
+queue.push(123)
+const pops = queue.pop()
+
+if (pops) {
+    pops.toFixed()
+}
+
+//接口中使用泛型
+interface keyValue<T, U> {
+    key: T,
+    value: U
+}
+
+let kv1: keyValue<number, string> = { key: 1, value: 'string' }
+let kv2: keyValue<string, number> = { key: 'str', value: 2 }
+
+
+//使用泛型重新定义数组
+let arr1: number[] = [1, 2, 3]
+let arr2: Array<number> = [1, 2, 3]
+
 ```
