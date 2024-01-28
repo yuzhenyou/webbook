@@ -572,9 +572,10 @@ Vue.directive('focus', {
 - Vue3.0中对这些API做出了调整：
 
    - 将全局的API，即：`Vue.xxx`调整到应用实例（`app`）上
-| 2.x 全局 API（`Vue`）| 3.x 实例 API (`app`) |
+   
+| 2.x 全局 API（`Vue`） | 3.x 实例 API (`app`) |
 | --- | --- |
-| Vue.config.xxxx| app.config.xxxx |
+| Vue.config.xxxx | app.config.xxxx |
 | Vue.config.productionTip | **移除** |
 | Vue.component | app.component |
 | Vue.directive | app.directive |
