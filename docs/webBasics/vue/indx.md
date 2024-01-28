@@ -11,52 +11,35 @@
 ## 2.Vue3带来了什么
 
 ### 1.性能的提升
-
-- 
-打包大小减少41%
-
-- 
-初次渲染快55%, 更新渲染快133%
-
-- 
-内存减少54%
-
+- 打包大小减少41%
+- 初次渲染快55%, 更新渲染快133%
+- 内存减少54%
 ......
 
 
 ### 2.源码的升级
-
-- 
-使用Proxy代替defineProperty实现响应式
-
-- 
-重写虚拟DOM的实现和Tree-Shaking
-
+- 使用Proxy代替defineProperty实现响应式
+- 重写虚拟DOM的实现和Tree-Shaking
 ......
-
-
 ### 3.拥抱TypeScript
 
 - Vue3可以更好的支持TypeScript
 
 ### 4.新的特性
 
-1. 
-Composition API（组合API）
+1.Composition API（组合API）
 
    - setup配置
    - ref与reactive
    - watch与watchEffect
    - provide与inject
    - ......
-2. 
-新的内置组件
+2.新的内置组件
 
    - Fragment
    - Teleport
    - Suspense
-3. 
-其他改变
+3.其他改变
 
    - 新的生命周期钩子
    - data 选项应始终被声明为一个函数
@@ -155,14 +138,12 @@ npm run dev
 
 ### vue2.x的响应式
 
-- 
-实现原理：
+- 实现原理：
 
-   - 
-对象类型：通过`Object.defineProperty()`对属性的读取、修改进行拦截（数据劫持）。
+   - 对象类型：通过`Object.defineProperty()`对属性的读取、修改进行拦截（数据劫持）。
 
-   - 
-数组类型：通过重写更新数组的一系列方法来实现拦截。（对数组的变更方法进行了包裹）。
+   - 数组类型：通过重写更新数组的一系列方法来实现拦截。（对数组的变更方法进行了包裹）。
+
 ```javascript
 Object.defineProperty(data, 'count', {
     get () {}, 
@@ -171,8 +152,7 @@ Object.defineProperty(data, 'count', {
 ```
 
 
-- 
-存在问题：
+- 存在问题：
 
    - 新增属性、删除属性, 界面不会更新。
    - 直接通过下标修改数组, 界面不会自动更新。
@@ -185,11 +165,9 @@ Object.defineProperty(data, 'count', {
    - 通过Reflect（反射）:  对源对象的属性进行操作。
    - MDN文档中描述的Proxy与Reflect：
 
-      - 
-Proxy：[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy)
+      - Proxy：[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy)
 
-      - 
-Reflect：[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Reflect](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Reflect)
+      - Reflect：[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Reflect](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Reflect)
 ```javascript
 new Proxy(data, {
 	// 拦截读取属性值
@@ -229,12 +207,10 @@ proxy.name = 'tom'
 
 ## 6.setup的两个注意点
 
-- 
-setup执行的时机
+- setup执行的时机
 
    - 在beforeCreate之前执行一次，this是undefined。
-- 
-setup的参数
+- setup的参数
 
    - props：值为对象，包含：组件外部传递过来，且组件内部声明接收了的属性。
    - context：上下文对象
@@ -247,11 +223,9 @@ setup的参数
 
 ### 1.computed函数
 
-- 
-与Vue2.x中computed配置功能一致
+- 与Vue2.x中computed配置功能一致
 
-- 
-写法
+- 写法
 ```javascript
 import {computed} from 'vue'
 
@@ -279,11 +253,9 @@ setup(){
 
 ### 2.watch函数
 
-- 
-与Vue2.x中watch配置功能一致
+- 与Vue2.x中watch配置功能一致
 
-- 
-两个小“坑”：
+- 两个小“坑”：
 
    - 监视reactive定义的响应式数据时：oldValue无法正确获取、强制开启了深度监视（deep配置失效）。
    - 监视reactive定义的响应式数据中某个属性时：deep配置有效。
@@ -324,14 +296,11 @@ watch(()=>person.job,(newValue,oldValue)=>{
 
 ### 3.watchEffect函数
 
-- 
-watch的套路是：既要指明监视的属性，也要指明监视的回调。
+- watch的套路是：既要指明监视的属性，也要指明监视的回调。
 
-- 
-watchEffect的套路是：不用指明监视哪个属性，监视的回调中用到哪个属性，那就监视哪个属性。
+- watchEffect的套路是：不用指明监视哪个属性，监视的回调中用到哪个属性，那就监视哪个属性。
 
-- 
-watchEffect有点像computed：
+- watchEffect有点像computed：
 
    - 但computed注重的计算出来的值（回调函数的返回值），所以必须要写返回值。
    - 而watchEffect更注重的是过程（回调函数的函数体），所以不用写返回值。
@@ -366,43 +335,33 @@ watchEffect(()=>{
 
 ## 9.自定义hook函数
 
-- 
 什么是hook？—— 本质是一个函数，把setup函数中使用的Composition API进行了封装。
 
-- 
-类似于vue2.x中的mixin。
+- 类似于vue2.x中的mixin。
 
-- 
-自定义hook的优势: 复用代码, 让setup中的逻辑更清楚易懂。
+- 自定义hook的优势: 复用代码, 让setup中的逻辑更清楚易懂。
 
 
 ## 10.toRef
 
-- 
-作用：创建一个 ref 对象，其value值指向另一个对象中的某个属性。
+- 作用：创建一个 ref 对象，其value值指向另一个对象中的某个属性。
 
-- 
-语法：`const name = toRef(person,'name')`
+- 语法：`const name = toRef(person,'name')`
 
-- 
-应用:   要将响应式对象中的某个属性单独提供给外部使用时。
+- 应用:   要将响应式对象中的某个属性单独提供给外部使用时。
 
-- 
-扩展：`toRefs` 与`toRef`功能一致，但可以批量创建多个 ref 对象，语法：`toRefs(person)`
+- 扩展：`toRefs` 与`toRef`功能一致，但可以批量创建多个 ref 对象，语法：`toRefs(person)`
 
 
 # 三、其它 Composition API
 
 ## 1.shallowReactive 与 shallowRef
 
-- 
-shallowReactive：只处理对象最外层属性的响应式（浅响应式）。
+- shallowReactive：只处理对象最外层属性的响应式（浅响应式）。
 
-- 
-shallowRef：只处理基本数据类型的响应式, 不进行对象的响应式处理。
+- shallowRef：只处理基本数据类型的响应式, 不进行对象的响应式处理。
 
-- 
-什么时候使用?
+- 什么时候使用?
 
    - 如果有一个对象数据，结构比较深, 但变化时只是外层属性变化 ===> shallowReactive。
    - 如果有一个对象数据，后续功能不会修改该对象中的属性，而是生新的对象来替换 ===> shallowRef。
@@ -429,11 +388,9 @@ shallowRef：只处理基本数据类型的响应式, 不进行对象的响应�
 
 ## 4.customRef
 
-- 
-作用：创建一个自定义的 ref，并对其依赖项跟踪和更新触发进行显式控制。
+- 作用：创建一个自定义的 ref，并对其依赖项跟踪和更新触发进行显式控制。
 
-- 
-实现防抖效果：
+- 实现防抖效果：
 ```vue
 <template>
 	<input type="text" v-model="keyword">
@@ -481,14 +438,11 @@ shallowRef：只处理基本数据类型的响应式, 不进行对象的响应�
 
 ![](https://v3.cn.vuejs.org/images/components_provide.png#)
 
-- 
-作用：实现**祖与后代组件间**通信
+- 作用：实现**祖与后代组件间**通信
 
-- 
-套路：父组件有一个 `provide` 选项来提供数据，后代组件有一个 `inject` 选项来开始使用这些数据
+- 套路：父组件有一个 `provide` 选项来提供数据，后代组件有一个 `inject` 选项来开始使用这些数据
 
-- 
-具体写法：
+- 具体写法：
 
    1. 
 祖组件中：
@@ -546,8 +500,7 @@ setup(props,context){
 
 ## 2.Teleport
 
-- 
-什么是Teleport？—— `Teleport` 是一种能够将我们的**组件html结构**移动到指定位置的技术。
+- 什么是Teleport？—— `Teleport` 是一种能够将我们的**组件html结构**移动到指定位置的技术。
 ```vue
 <teleport to="移动位置">
 	<div v-if="isShow" class="mask">
@@ -563,22 +516,18 @@ setup(props,context){
 
 ## 3.Suspense
 
-- 
-等待异步组件时渲染一些额外内容，让应用有更好的用户体验
+- 等待异步组件时渲染一些额外内容，让应用有更好的用户体验
 
-- 
-使用步骤：
+- 使用步骤：
 
-   - 
-异步引入组件
+   - 异步引入组件
 ```javascript
 import {defineAsyncComponent} from 'vue'
 const Child = defineAsyncComponent(()=>import('./components/Child.vue'))
 ```
 
 
-   - 
-使用`Suspense`包裹组件，并配置好`default` 与 `fallback`
+   - 使用`Suspense`包裹组件，并配置好`default` 与 `fallback`
 ```vue
 <template>
 	<div class="app">
@@ -601,11 +550,9 @@ const Child = defineAsyncComponent(()=>import('./components/Child.vue'))
 
 ## 1.全局API的转移
 
-- 
-Vue 2.x 有许多全局 API 和配置。
+- Vue 2.x 有许多全局 API 和配置。
 
-   - 
-例如：注册全局组件、注册全局指令等。
+   - 例如：注册全局组件、注册全局指令等。
 ```javascript
 //注册全局组件
 Vue.component('MyButton', {
@@ -622,34 +569,29 @@ Vue.directive('focus', {
 ```
 
 
-- 
-Vue3.0中对这些API做出了调整：
+- Vue3.0中对这些API做出了调整：
 
-   - 
-将全局的API，即：`Vue.xxx`调整到应用实例（`app`）上
-| 2.x 全局 API（`Vue`） | 3.x 实例 API (`app`) |
-| --- | --- |
-| Vue.config.xxxx | app.config.xxxx |
-| Vue.config.productionTip | **移除** |
-| Vue.component | app.component |
-| Vue.directive | app.directive |
-| Vue.mixin | app.mixin |
-| Vue.use | app.use |
-| Vue.prototype | app.config.globalProperties |
+   - 将全局的API，即：`Vue.xxx`调整到应用实例（`app`）上
+   | 2.x 全局 API（`Vue`） | 3.x 实例 API (`app`) |
+   | --- | --- |
+   | Vue.config.xxxx | app.config.xxxx |
+   | Vue.config.productionTip | **移除** |
+   | Vue.component | app.component |
+   | Vue.directive | app.directive |
+   | Vue.mixin | app.mixin |
+   | Vue.use | app.use |
+   | Vue.prototype | app.config.globalProperties |
 
 
 
 
 ## 2.其他改变
 
-- 
-data选项应始终被声明为一个函数。
+- data选项应始终被声明为一个函数。
 
-- 
-过度类名的更改：
+- 过度类名的更改：
 
-   - 
-Vue2.x写法
+   - Vue2.x写法
 ```css
 .v-enter,
 .v-leave-to {
@@ -662,8 +604,7 @@ Vue2.x写法
 ```
 
 
-   - 
-Vue3.x写法
+   - Vue3.x写法
 ```css
 .v-enter-from,
 .v-leave-to {
@@ -677,14 +618,11 @@ Vue3.x写法
 ```
 
 
-- 
-**移除**keyCode作为 v-on 的修饰符，同时也不再支持`config.keyCodes`
+- **移除**keyCode作为 v-on 的修饰符，同时也不再支持`config.keyCodes`
 
-- 
-**移除**`v-on.native`修饰符
+- **移除**`v-on.native`修饰符
 
-   - 
-父组件中绑定事件
+   - 父组件中绑定事件
 ```vue
 <my-component
   v-on:close="handleComponentEvent"
@@ -693,8 +631,7 @@ Vue3.x写法
 ```
 
 
-   - 
-子组件中声明自定义事件
+   - 子组件中声明自定义事件
 ```vue
 <script>
   export default {
@@ -704,12 +641,10 @@ Vue3.x写法
 ```
 
 
-- 
-**移除**过滤器（filter）
+- **移除**过滤器（filter）
 > 过滤器虽然这看起来很方便，但它需要一个自定义语法，打破大括号内表达式是 “只是 JavaScript” 的假设，这不仅有学习成本，而且有实现成本！建议用方法调用或计算属性去替换过滤器。
 
 
 
-- 
-......
+- ......
 

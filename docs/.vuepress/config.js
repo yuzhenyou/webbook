@@ -110,6 +110,6 @@ export default defineUserConfig({
     port: 3000,
     lang: 'zh-CN',
     title: '前端文档',
-    description: '',
+    description: '知识库',
     colorMode: 'light',
 })
