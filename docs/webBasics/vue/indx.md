@@ -27,19 +27,21 @@
 
 ### 4.新的特性
 
-1.Composition API（组合API）
+1. Composition API（组合API）
 
    - setup配置
    - ref与reactive
    - watch与watchEffect
    - provide与inject
    - ......
-2.新的内置组件
+
+2. 新的内置组件
 
    - Fragment
    - Teleport
    - Suspense
-3.其他改变
+
+3. 其他改变
 
    - 新的生命周期钩子
    - data 选项应始终被声明为一个函数
@@ -444,8 +446,7 @@ watchEffect(()=>{
 
 - 具体写法：
 
-   1. 
-祖组件中：
+   1. 祖组件中：
 ```javascript
 setup(){
 	......
@@ -456,8 +457,7 @@ setup(){
 ```
 
 
-   2. 
-后代组件中：
+   2. 后代组件中：
 ```javascript
 setup(props,context){
 	......
@@ -572,15 +572,15 @@ Vue.directive('focus', {
 - Vue3.0中对这些API做出了调整：
 
    - 将全局的API，即：`Vue.xxx`调整到应用实例（`app`）上
-   | 2.x 全局 API（`Vue`） | 3.x 实例 API (`app`) |
-   | --- | --- |
-   | Vue.config.xxxx | app.config.xxxx |
-   | Vue.config.productionTip | **移除** |
-   | Vue.component | app.component |
-   | Vue.directive | app.directive |
-   | Vue.mixin | app.mixin |
-   | Vue.use | app.use |
-   | Vue.prototype | app.config.globalProperties |
+| 2.x 全局 API（`Vue`）| 3.x 实例 API (`app`) |
+| --- | --- |
+| Vue.config.xxxx| app.config.xxxx |
+| Vue.config.productionTip | **移除** |
+| Vue.component | app.component |
+| Vue.directive | app.directive |
+| Vue.mixin | app.mixin |
+| Vue.use | app.use |
+| Vue.prototype | app.config.globalProperties |
 
 
 
