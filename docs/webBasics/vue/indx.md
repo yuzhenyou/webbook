@@ -1,19 +1,15 @@
-<a name="956552a8"></a>
 # Vue3快速上手
 
 ![](https://user-images.githubusercontent.com/499550/93624428-53932780-f9ae-11ea-8d16-af949e16a09f.png#)
 
-<a name="46c4081b"></a>
 ## 1.Vue3简介
 
 - 2020年9月18日，Vue.js发布3.0版本，代号：One Piece（海贼王）
 - 耗时2年多、[2600+次提交](https://github.com/vuejs/vue-next/graphs/commit-activity)、[30+个RFC](https://github.com/vuejs/rfcs/tree/master/active-rfcs)、[600+次PR](https://github.com/vuejs/vue-next/pulls?q=is%3Apr+is%3Amerged+-author%3Aapp%2Fdependabot-preview+)、[99位贡献者](https://github.com/vuejs/vue-next/graphs/contributors)
 - github上的tags地址：[https://github.com/vuejs/vue-next/releases/tag/v3.0.0](https://github.com/vuejs/vue-next/releases/tag/v3.0.0)
 
-<a name="9ecbf080"></a>
 ## 2.Vue3带来了什么
 
-<a name="82cb24a0"></a>
 ### 1.性能的提升
 
 - 
@@ -24,10 +20,10 @@
 
 - 
 内存减少54%
-<br />......
+
+......
 
 
-<a name="a248fb3b"></a>
 ### 2.源码的升级
 
 - 
@@ -35,15 +31,14 @@
 
 - 
 重写虚拟DOM的实现和Tree-Shaking
-<br />......
+
+......
 
 
-<a name="aed39640"></a>
 ### 3.拥抱TypeScript
 
 - Vue3可以更好的支持TypeScript
 
-<a name="0b61e959"></a>
 ### 4.新的特性
 
 1. 
@@ -68,10 +63,8 @@ Composition API（组合API）
    - 移除keyCode支持作为 v-on 的修饰符
    - ......
 
-<a name="94c77660"></a>
 # 一、创建Vue3.0工程
 
-<a name="72e92b1c"></a>
 ## 1.使用 vue-cli 创建
 
 官方文档：[https://cli.vuejs.org/zh/guide/creating-a-project.html#vue-create](https://cli.vuejs.org/zh/guide/creating-a-project.html#vue-create)
@@ -88,7 +81,6 @@ cd vue_test
 npm run serve
 ```
 
-<a name="2ab7faab"></a>
 ## 2.使用 vite 创建
 
 官方文档：[https://v3.cn.vuejs.org/guide/installation.html#vite](https://v3.cn.vuejs.org/guide/installation.html#vite)
@@ -116,12 +108,10 @@ npm install
 npm run dev
 ```
 
-<a name="1dd8e989"></a>
 # 二、常用 Composition API
 
 官方文档: [https://v3.cn.vuejs.org/guide/composition-api-introduction.html](https://v3.cn.vuejs.org/guide/composition-api-introduction.html)
 
-<a name="7d579a2e"></a>
 ## 1.拉开序幕的setup
 
 1. 理解：Vue3.0中一个新的配置项，值为一个函数。
@@ -140,7 +130,6 @@ npm run dev
       - 如果有重名, setup优先。
    2. setup不能是一个async函数，因为返回值不再是return的对象, 而是promise, 模板看不到return对象中的属性。（后期也可以返回一个Promise实例，但需要Suspense和异步组件的配合）
 
-<a name="d64ec6cf"></a>
 ## 2.ref函数
 
 - 作用: 定义一个响应式的数据
@@ -155,7 +144,6 @@ npm run dev
    - 基本类型的数据：响应式依然是靠`Object.defineProperty()`的`get`与`set`完成的。
    - 对象类型的数据：内部 “ 求助 ” 了Vue3.0中的一个新函数—— `reactive`函数。
 
-<a name="4d996a47"></a>
 ## 3.reactive函数
 
 - 作用: 定义一个**对象类型**的响应式数据（基本类型不要用它，要用`ref`函数）
@@ -163,10 +151,8 @@ npm run dev
 - reactive定义的响应式数据是“深层次的”。
 - 内部基于 ES6 的 Proxy 实现，通过代理对象操作源对象内部数据进行操作。
 
-<a name="8faee4ba"></a>
 ## 4.Vue3.0中的响应式原理
 
-<a name="b705749f"></a>
 ### vue2.x的响应式
 
 - 
@@ -191,7 +177,6 @@ Object.defineProperty(data, 'count', {
    - 新增属性、删除属性, 界面不会更新。
    - 直接通过下标修改数组, 界面不会自动更新。
 
-<a name="d53edc9f"></a>
 ### Vue3.0的响应式
 
 - 实现原理:
@@ -226,7 +211,6 @@ proxy.name = 'tom'
 
 
 
-<a name="6e5a804b"></a>
 ## 5.reactive对比ref
 
 - 从定义数据角度对比：
@@ -243,7 +227,6 @@ proxy.name = 'tom'
    - ref定义的数据：操作数据**需要**`.value`，读取数据时模板中直接读取**不需要**`.value`。
    - reactive定义的数据：操作数据与读取数据：**均不需要**`.value`。
 
-<a name="ce921510"></a>
 ## 6.setup的两个注意点
 
 - 
@@ -260,10 +243,8 @@ setup的参数
       - slots: 收到的插槽内容, 相当于 `this.$slots`。
       - emit: 分发自定义事件的函数, 相当于 `this.$emit`。
 
-<a name="b485ccd2"></a>
 ## 7.计算属性与监视
 
-<a name="7b365ab3"></a>
 ### 1.computed函数
 
 - 
@@ -296,7 +277,6 @@ setup(){
 
 
 
-<a name="3e34d6d8"></a>
 ### 2.watch函数
 
 - 
@@ -342,7 +322,6 @@ watch(()=>person.job,(newValue,oldValue)=>{
 },{deep:true}) //此处由于监视的是reactive素定义的对象中的某个属性，所以deep配置有效
 ```
 
-<a name="74e3162a"></a>
 ### 3.watchEffect函数
 
 - 
@@ -365,7 +344,6 @@ watchEffect(()=>{
 })
 ```
 
-<a name="c36c8f03"></a>
 ## 8.生命周期
 
 **vue2.x的生命周期**![](https://cn.vuejs.org/images/lifecycle.png#alt=lifecycle_2)**vue3.0的生命周期**![](https://v3.cn.vuejs.org/images/lifecycle.svg#alt=lifecycle_2)
@@ -386,7 +364,6 @@ watchEffect(()=>{
    - `beforeUnmount` ==>`onBeforeUnmount`
    - `unmounted` =====>`onUnmounted`
 
-<a name="8345d354"></a>
 ## 9.自定义hook函数
 
 - 
@@ -399,7 +376,6 @@ watchEffect(()=>{
 自定义hook的优势: 复用代码, 让setup中的逻辑更清楚易懂。
 
 
-<a name="10.toRef"></a>
 ## 10.toRef
 
 - 
@@ -415,10 +391,8 @@ watchEffect(()=>{
 扩展：`toRefs` 与`toRef`功能一致，但可以批量创建多个 ref 对象，语法：`toRefs(person)`
 
 
-<a name="5130b254"></a>
 # 三、其它 Composition API
 
-<a name="f159085c"></a>
 ## 1.shallowReactive 与 shallowRef
 
 - 
@@ -433,14 +407,12 @@ shallowRef：只处理基本数据类型的响应式, 不进行对象的响应�
    - 如果有一个对象数据，结构比较深, 但变化时只是外层属性变化 ===> shallowReactive。
    - 如果有一个对象数据，后续功能不会修改该对象中的属性，而是生新的对象来替换 ===> shallowRef。
 
-<a name="3bc061fe"></a>
 ## 2.readonly 与 shallowReadonly
 
 - readonly: 让一个响应式数据变为只读的（深只读）。
 - shallowReadonly：让一个响应式数据变为只读的（浅只读）。
 - 应用场景: 不希望数据被修改时。
 
-<a name="3641c9f0"></a>
 ## 3.toRaw 与 markRaw
 
 - toRaw：
@@ -455,7 +427,6 @@ shallowRef：只处理基本数据类型的响应式, 不进行对象的响应�
       1. 有些值不应被设置为响应式的，例如复杂的第三方类库等。
       2. 当渲染具有不可变数据源的大列表时，跳过响应式转换可以提高性能。
 
-<a name="4.customRef"></a>
 ## 4.customRef
 
 - 
@@ -506,7 +477,6 @@ shallowRef：只处理基本数据类型的响应式, 不进行对象的响应�
 
 
 
-<a name="80c1bb2a"></a>
 ## 5.provide 与 inject
 
 ![](https://v3.cn.vuejs.org/images/components_provide.png#)
@@ -545,7 +515,6 @@ setup(props,context){
 
 
 
-<a name="09c12199"></a>
 ## 6.响应式数据的判断
 
 - isRef: 检查一个值是否为一个 ref 对象
@@ -553,34 +522,28 @@ setup(props,context){
 - isReadonly: 检查一个对象是否是由 `readonly` 创建的只读代理
 - isProxy: 检查一个对象是否是由 `reactive` 或者 `readonly` 方法创建的代理
 
-<a name="c5dc6007"></a>
 # 四、Composition API 的优势
 
-<a name="ef1e090b"></a>
 ## 1.Options API 存在的问题
 
 使用传统OptionsAPI中，新增或者修改一个需求，就需要分别在data，methods，computed里修改 。
 
 ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f84e4e2c02424d9a99862ade0a2e4114~tplv-k3u1fbpfcp-watermark.image#)
 ![](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e5ac7e20d1784887a826f6360768a368~tplv-k3u1fbpfcp-watermark.image#)
-<a name="e76f35ec"></a>
 ## 2.Composition API 的优势
 
 我们可以更加优雅的组织我们的代码，函数。让相关功能的代码更加有序的组织在一起。
 
 ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bc0be8211fc54b6c941c036791ba4efe~tplv-k3u1fbpfcp-watermark.image#)
 ![](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6cc55165c0e34069a75fe36f8712eb80~tplv-k3u1fbpfcp-watermark.image#)
-<a name="fd46eec1"></a>
 # 五、新的组件
 
-<a name="1.Fragment"></a>
 ## 1.Fragment
 
 - 在Vue2中: 组件必须有一个根标签
 - 在Vue3中: 组件可以没有根标签, 内部会将多个标签包含在一个Fragment虚拟元素中
 - 好处: 减少标签层级, 减小内存占用
 
-<a name="2.Teleport"></a>
 ## 2.Teleport
 
 - 
@@ -598,7 +561,6 @@ setup(props,context){
 
 
 
-<a name="3.Suspense"></a>
 ## 3.Suspense
 
 - 
@@ -635,10 +597,8 @@ const Child = defineAsyncComponent(()=>import('./components/Child.vue'))
 
 
 
-<a name="f3800fb1"></a>
 # 六、其他
 
-<a name="d79c4efd"></a>
 ## 1.全局API的转移
 
 - 
@@ -680,7 +640,6 @@ Vue3.0中对这些API做出了调整：
 
 
 
-<a name="4369ae60"></a>
 ## 2.其他改变
 
 - 

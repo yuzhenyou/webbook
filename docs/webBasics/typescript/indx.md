@@ -85,8 +85,6 @@ users.push('李四')
 users.push(30)
 users.push(true) //类型“boolean”的参数不能赋给类型“string | number”的参数
 ```
-
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/22383356/1706342117104-4ca21143-b5eb-4403-8fc1-e3e47d90a3b1.png#averageHue=%23668643&clientId=u66c66441-197e-4&from=paste&height=346&id=u62c46cec&originHeight=346&originWidth=746&originalType=binary&ratio=1&rotation=0&showTitle=false&size=29837&status=done&style=none&taskId=ub3807f24-011a-468f-a0cf-c7bd81a098e&title=&width=746)
 ## 3.Interface（接口）
 ```typescript
 //一个对象特征的描述
@@ -405,5 +403,60 @@ let kv2: keyValue<string, number> = { key: 'str', value: 2 }
 //使用泛型重新定义数组
 let arr1: number[] = [1, 2, 3]
 let arr2: Array<number> = [1, 2, 3]
+
+```
+## 8.类型别名、字面量、交叉类型
+```typescript
+//类型别名
+let sum = (x: number, y: number): number => {
+    return x + y
+}
+
+const result = sum(1, 2)
+
+type sumType = (x: number, y: number) => number
+
+let sums: sumType = (x, y) => {
+    return x + y
+}
+
+const result2 = sums(1, 2)
+
+type a = string;
+
+let str1: string;
+
+let str2: a;
+
+type stringOrNumber = string | number
+
+const str3: stringOrNumber = '123'
+
+const str4: stringOrNumber = 100
+
+
+//字面量（基本类型）,经常配合枚举的常量使用，限定约束范围值
+
+const str5: 100 = 100
+const str6: 100 = '100'  //不能将类型“"100"”分配给类型“100”
+
+const str7: 'hello' = 'hello'
+
+type Directions = 'UP' | 'DOWN' | 'LEFT' | 'RIGHT'
+
+const dir: Directions = 'LEFT'
+
+const dir1: Directions = 100  //不能将类型“100”分配给类型“Directions”。
+
+//交叉类型(联合类型对应)
+
+interface IName {
+    name: string
+}
+
+type IPersion = IName & { age: number }
+
+let persons: IPersion = { name: 'zhangsan', age: 20 }
+
 
 ```
